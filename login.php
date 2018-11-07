@@ -20,11 +20,11 @@ $cajaPassword = $_POST['cajaPassword'];
 $elHash = '$2y$10$GyX2YE234sMxc5qT8ZwIIOHdEaBm7xzM.EIL.O44VP202Hbb4wDCa';
 //filtro basico para evitar inyeccion SQL
 //echo 'Has escrito el usuario: '.$cajaNombre.' y la contraseña: '.$cajaPassword; 
-echo $cajaNombre, $cajaPassword;
+
 $password_encriptada = password_hash($cajaPassword, PASSWORD_BCRYPT);
 
 if (password_verify($cajaPassword, $elHash)) {
-    echo 'contraseña correcta';
+    
 } else {
     echo 'contraseña Incorrecta';
 }
@@ -36,15 +36,15 @@ $numnUsuariosd = $resultadoQuery->num_rows;
 //    $r = $resultadoQuery -> fetch_array();
 //    ech o $r['nombreUsuario'] .'<br/>';
 //}
-
-//if ($numnUsuariosd > 0) {
-//    //muesta applicacion
-//    $r = $resultadoQuery -> fetch_array();
-//    $_SESSION['nombreUsuario']= $cajaNombre;
-//    $_SESSION['id_usuario']= $r['id_usuario'];
-//    
-//    require 'aplicacion.php';
-//} else {
-//    //muesta error
-//    require 'error.php';
-//}
+//
+if ($numnUsuariosd > 0) {
+    //muesta applicacion
+    $r = $resultadoQuery -> fetch_array();
+    $_SESSION['nombreUsuario']= $cajaNombre;
+    $_SESSION['id_usuario']= $r['id_usuario'];
+    
+    require 'aplicacion.php';
+} else {
+    //muesta error
+    require 'error.php';
+}

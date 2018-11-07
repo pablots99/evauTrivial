@@ -33,10 +33,10 @@ for ($i = 0; $i < $numPreguntas; $i++) {
 $preguntaActual = rand(0, $numPreguntas - 1);
 ?>
 <div id="contenedor">
-    <div>
+    <div>0
 
 
-        <h1><a id="sigue1" class="btn btn-block btn-primary" ><?php echo $_SESSION['nombreUsuario'] ?></a></h1>
+        <h1><a id="sigue1" class="btn btn-block btn-primary" >Usuario: <?php echo $_SESSION['nombreUsuario'] ?></a></h1>
         <h1><a id="sigue1" class="btn btn-block btn-primary" ><?php echo $tema; ?></a></h1>
         <div id="cajatiempo" style="height: 30px;" >
             <div id="tiempo" class="progress-bar progress-bar-striped bg-success" style="width: 0%;"></div>
@@ -78,28 +78,21 @@ $preguntaActual = rand(0, $numPreguntas - 1);
         var caja = $("#cajatiempo");
 
 
-        if (segundo == 
-                10 ) {
+        if (segundo ==  10 ) {
 
             sigue();
 
         } else {
 
-            tiempo.width(tiempo.width() + caja.width() / 10);
+            
 
             segundo++;
         }
         //cambia el color de la barra dependiendo del segundo en que está
-        if (segundo < 5) {
-            tiempo.removeClass("bg-warning").removeClass("bg-danger").addClass("bg-success");
-        } else if (segundo < 8) {
-            tiempo.removeClass("bg-success").addClass("bg-warning");
-        } else {
-            tiempo.removeClass("bg-warning").addClass("bg-danger");
-        }
+     
         tiempo.text(segundo);
     }, 600);
-    var contadorPreguntas = 20;
+    var contadorPreguntas = 15;
     //cargo el array php de preguntas en una variable javascript
     var listaPreguntas = <?php echo json_encode($listaPreguntas); ?>;
     //calculo un numero aleatorio
@@ -119,7 +112,7 @@ $preguntaActual = rand(0, $numPreguntas - 1);
     function sigue() {
         contadorPreguntas = contadorPreguntas - 1;
         numeroPregunta = Math.floor(Math.random() * listaPreguntas.length);
-        tiempo.width(0);
+        tiempo.width(caja.width());
         segundo = 0;
 //que no se repitan preguntas
 //      var p = false;
@@ -167,18 +160,19 @@ $preguntaActual = rand(0, $numPreguntas - 1);
         console.log(numeroCorrecta);
         console.log(num);
         if (numeroCorrecta == num) {
-            tiempo.width(caja.width());
+        
             segundo = 9;
+            document.getElementById('r' + num).className = "btn btn-block  btn-success";
 
 
         } else {
-            tiempo.width(caja.width());
+          
             segundo = 9;
 
             vidas = vidas - 1;
             console.log("vidas" + vidas);
             $('#r5').text("VIDAS = " + vidas);
-            document.getElementById('r' + numeroCorrecta).className += "btn btn-block  btn-danger";
+            document.getElementById('r' + numeroCorrecta).className = "btn btn-block  btn-danger";
             document.getElementById('r' + num).className = "btn btn-block  btn-success";
 
             if (vidas == 2) {
